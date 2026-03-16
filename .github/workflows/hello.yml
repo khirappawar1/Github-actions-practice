@@ -1,0 +1,18 @@
+name: Hello Yaml
+on:
+  push:
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: greet user
+        run: echo "Hello to Omkar from GitHu Actions!"
+      
+      - name: print hostname
+        run: hostname
+
+      - name: print date and time
+        run: date
