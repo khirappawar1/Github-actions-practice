@@ -16,3 +16,9 @@ jobs:
 
       - name: print date and time
         run: date
+      
+      - name: List all files in repo
+        run: ls -la
+
+      - name: Print runner's OS
+        run: echo "runner OS:${{runner.os}}"
