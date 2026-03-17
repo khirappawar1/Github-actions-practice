@@ -12,8 +12,13 @@ jobs:
               echo "OS: $(uname -a)"
               echo "Hostname: $(hostname)"
               echo "user: $(whoami)"
-
-
+          - name: Pre-installed softwares
+            run: |
+              docker --version
+              python --version 
+              git --version
+              node --version
+    
     windows-os:
       runs-on: windows-latest
       steps:
@@ -22,6 +27,7 @@ jobs:
                 echo "OS: $env:OS"
                 echo "Hostname: $env:COMPUTERNAME"
                 echo "User: $env:USERNAME"
+    
     macos-latest:
         runs-on: macos-latest
         steps:
@@ -30,4 +36,4 @@ jobs:
                 echo "OS: $(sw_vers -productName) $(sw_vers -productVersion)"
                 echo "Hostname: $(hostname)"
                 echo "User: $(whoami)"
-
+                
