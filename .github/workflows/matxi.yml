@@ -1,0 +1,18 @@
+---
+name: Matrix python-setup
+"on":
+    push:
+        branches: [main]
+jobs: 
+    python_setup:
+        runs-on: ubuntu-latest
+        strategy: 
+            matrix: 
+                python-version: [3.10, 3.11, 3.12]
+        steps: 
+          - name: pyhton-setup ${{ matrix.python-version }}
+            uses: actions/setup-python@v4
+            with:
+              pyhton-version: ${{matrix.python-version}}
+          - name: Check pyhton version
+            run: python --version
