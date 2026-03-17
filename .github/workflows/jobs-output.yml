@@ -20,6 +20,6 @@ jobs:
         needs: output-date
         steps:
             - name: Print the output date
-              run: echo "Today's date is:${{needs.output-date.outputs.today}}"
+              run: echo "Today's date is ${{ needs.output-date.outputs.today }}"
 
               
