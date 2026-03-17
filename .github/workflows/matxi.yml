@@ -22,7 +22,7 @@ jobs:
               python-version: ${{matrix.python-version}}
           - name: Check python version
             run: |
-              echo "Running on os ${{matrix.os}} with python ${{matrix.python-version}}"\
+              echo "Running on os ${{matrix.os}} with python ${{matrix.python-version}}"
               python --version
           - name: Force failure (testing)
             if: matrix.python-version == '3.11' && matrix.os == 'ubuntu-latest'
