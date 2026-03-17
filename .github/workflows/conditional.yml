@@ -19,7 +19,7 @@ jobs:
           - name: Step that always fails
             id: fail_step
             run: exit 1
-            continue-on-error: false
+            continue-on-error: true
 
           - name: step that fails when preious step fails
             if: failure()
