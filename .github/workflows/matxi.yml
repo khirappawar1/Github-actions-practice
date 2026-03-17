@@ -9,7 +9,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         
         strategy:
-            fail-fast: true  #if one job fails, GitHub cancels all remaining matrix jobs.
+            fail-fast: false #if one job fails, GitHub cancels all remaining matrix jobs.
             matrix:
                 os: [ubuntu-latest, windows-latest]
                 python-version: [3.10, 3.11, 3.12]
