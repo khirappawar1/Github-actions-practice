@@ -11,7 +11,8 @@ jobs:
         steps:
           - name: Today's date
             id: get-date
-            run: | 
+            run: |
+              DATE=$(date +%Y-%m-%d)
               echo "date=$(date)" >> $GITHUB_OUTPUT
     
     read-output:
