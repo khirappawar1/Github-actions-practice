@@ -1,24 +1,25 @@
 ---
-name: Job Outputs Example
-
+name: Job output
 on:
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  set-date:
-    runs-on: ubuntu-latest
-    outputs:
-      today: ${{ steps.get-date.outputs.today }}   # expose output to other jobs
-    steps:
-      - name: Get today's date
-        id: get-date
-        run: |
-          DATE=$(date +%Y-%m-%d)
-          echo "today=$DATE" >> $GITHUB_OUTPUT
+    output-date:
+        runs-on: ubuntu-latest
+        outputs:
+            today: ${{ steps.get-date.outputs.date }}
+        steps:
+          - name: Today's date
+            id: get-date
+            run: |
+              DATE=$(date +%Y-%m-%d)
+              echo "date=$(DATE)" >> $GITHUB_OUTPUT
+    
+    read-output:
+        runs-on: ubuntu-latest
+        needs: output-date
+        steps:
+            - name: Print the output date
+              run: echo "Today's date is:${{needs.output-date.outputs.today}}"
 
-  print-date:
-    runs-on: ubuntu-latest
-    needs: set-date   # depends on set-date job
-    steps:
-      - name: Print the date from previous job
-        run: echo "Today's date is ${{ needs.set-date.outputs.today }}"
+              
