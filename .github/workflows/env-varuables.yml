@@ -1,0 +1,30 @@
+---
+name: Enviromantal variables Demo
+
+on:
+    workflow_dispatch:
+env:
+    MY_APP: myapp
+
+jobs: 
+    print_vars:
+      runs-on: ubuntu-latest
+      env:
+        ENVIRONMENT: staging
+
+      steps:
+        - name: print variables
+          env:
+            VERSION: 1.0.0
+          run: | 
+            echo "App: $MY_APP"
+            echo "Environment: $ENVIRONMENT"
+            echo "Version $VERSION"
+            
+        - name: Print commit SHA and actor
+          run: | 
+            echo "Commit SHA: ${{ github.sha }}"
+            echo "Triggered by: ${{ github.actor }}"
+
+
+
