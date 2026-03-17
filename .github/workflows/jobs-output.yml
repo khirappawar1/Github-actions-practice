@@ -1,5 +1,5 @@
 ---
-name: Job output
+name: Job output Example
 on:
     workflow_dispatch:
 
