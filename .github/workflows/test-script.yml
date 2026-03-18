@@ -15,4 +15,4 @@ jobs:
             - name: run the script
               run: |
                 echo "Running the script"
-                ./test-scripts.sh
+                ./test-script.sh
