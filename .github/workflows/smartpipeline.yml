@@ -1,0 +1,42 @@
+---
+name: linting Test
+on:
+  push:
+    branches: [main, feature]
+
+jobs: 
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+          - run: |
+              echo "Running linting test"
+    
+    test:
+        runs-on: ubuntu-latest
+        steps:
+           - run: |
+              echo "Running test..."
+
+    summary:
+        runs-on: ubuntu-latest
+        needs: [lint, test]
+
+        steps:
+          - name: print branch info
+            run: echo 'Branch ${{ github.ref }}'
+        
+
+          - name: check if main branch
+            if: github.ref == 'refs/heads/main'
+            run: echo "This is main branch push"
+
+          - name: feature branch message
+            if: github.ref != 'refs/heads/main'
+            run: echo "This is feature brach"
+
+          - name: print the github commit message
+            run: echo "commit message ${{ github.event.head_commit.message }}"
+
+
+
+
