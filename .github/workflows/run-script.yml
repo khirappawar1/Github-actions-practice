@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
 jobs:
     python-script:
-        runs-on: ubunut-latest
+        runs-on: ubuntu-latest
         steps:
             - name: checkout the code
               uses: actions/checkout@v4
