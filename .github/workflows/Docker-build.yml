@@ -13,7 +13,6 @@ jobs:
 
           - name: Set short commit SHA
             run: |
-              SHORT_SHA=${GITHUB_SHA::7}
               echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
          
           - name: setup python
