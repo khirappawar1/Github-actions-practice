@@ -2,7 +2,7 @@
 name: Docker Build
 on:
     push:
-        branches: [main]
+        branches: [main,dev/*]
 
 jobs:
     build:
@@ -13,8 +13,9 @@ jobs:
 
           - name: Set short commit SHA
             run: |
+              - name: Set short commit SHA
               SHORT_SHA=${GITHUB_SHA::7}
-              echo "Short SHA is $SHORT_SHA" >>$GITHUB_ENV
+              echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
          
           - name: setup python
             uses: actions/setup-python@v5
