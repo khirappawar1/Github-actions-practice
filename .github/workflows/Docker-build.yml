@@ -17,7 +17,8 @@ jobs:
           - name: setup docker Buildx
             uses: docker/setup-buildx-action@v3
           - name: Build the docker image
-            run: docker build -t Dockerfile .
+            working-directory: ./simpe-app
+            run: docker build -t simpe-app .
           - name: docker tag image
             run: docker tag simpe-app khirappawar/simpe-app:latest
             
