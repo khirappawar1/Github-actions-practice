@@ -15,7 +15,7 @@ jobs:
             - name: Cache dependencies
               uses: actions/cache@v4
               with:
-                path: ~/.cache/pip     #It restores or saves cache
+                path: ~/.cache/pip    #It restores or saves cache
                 key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }} #OS + hash = unique cache key
                 restore-keys: |
                   ${{ runner.os }}-pip-
