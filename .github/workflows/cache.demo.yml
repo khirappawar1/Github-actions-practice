@@ -1,23 +1,30 @@
----
 name: Cache Demo
-on:
-    workflow_dispatch:
-jobs:
-    Cache-Demo:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout code
-              uses: actions/checkout@v4
-            - name: setup python
-              uses: actions/setup-python@v5
-              with:
-                python-version: '3.11'
-            - name: Cache dependencies
-              uses: actions/cache@v4
-              with:
-                path: ~/.cache/pip    #It restores or saves cache
-                key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }} #OS + hash = unique cache key
-                restore-keys: |
-                  ${{ runner.os }}-pip-
-            #It will pick the most recent matching cache
 
+on:
+  push:
+
+jobs:
+  cache-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script
+        run: python script.py
