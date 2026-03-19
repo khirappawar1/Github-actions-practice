@@ -9,7 +9,7 @@ COPY . .
 COPY /src/script.py /app/script.py
 
 #Complie the python code
-RUN pip install -r --no-cache-dir requirements.txt 
+RUN pip install --no-cache-dir -r requirements.txt 
 
 #Run the python when container starts
 CMD ["python","script.py"]
