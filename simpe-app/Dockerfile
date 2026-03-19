@@ -9,4 +9,4 @@ COPY . .
 COPY /src/script.py /app/script.py
 
 #Run the python when container starts
-CMD ["python","script.py"]
+CMD ["python", "script.py"]
