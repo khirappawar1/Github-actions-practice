@@ -25,9 +25,8 @@ jobs:
 
             - name: Docker build image
               run: |
-                docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-app /
-                docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-app:$SHORT_SHA ./Docker-app
-
+                docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-app .
+                docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-app:$SHORT_SHA . 
             - name: Docker push to docker hub
               if: github.ref == 'refs/heads/main'
               run: |
