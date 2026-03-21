@@ -38,7 +38,7 @@ jobs:
     pr-body-check:
         runs-on: ubuntu-latest
         steps:
-            - name: Read the PR body
+            - name: Read PR body
               run: |
                 BODY="${{ github.event.pull_request.body }}"
                 if [ -z "$BODY" ]; then
