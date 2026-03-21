@@ -22,6 +22,6 @@ jobs:
             - name: Run when PR is merged
               if: ${{ github.event.pull_request.merged == true }}
               run: |
-                  echo: "PR was merged"
+                  echo "PR was merged"
 
 
