@@ -32,4 +32,4 @@ jobs:
             - name: Generate Build version
               run: |
                 VERSION="v1.0-${GITHUB_SHA::7}"
-                echo "version=$VERSION" >> $GUTHUB_OUTPUT
+                echo "version=$VERSION" >> $GITHUB_OUTPUT
