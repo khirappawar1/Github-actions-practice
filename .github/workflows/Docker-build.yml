@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 ---
 name: Docker Build
 on:
@@ -42,7 +42,7 @@ jobs:
             run: |
               docker push ${{ secrets.DOCKER_USERNAME }}/simpe-app
               docker push ${{ secrets.DOCKER_USERNAME }}/simpe-app:sha-${{ env.SHA_SHORT }}
-=======
+=========
 name: Docker Build
 on:
   push:
@@ -77,4 +77,4 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/simpe-app
           docker push ${{ secrets.DOCKER_USERNAME }}/simpe-app:$SHORT_SHA
->>>>>>> 60288f1480785c901bdf0e4d7728932989144251
+>>>>>>>>> Temporary merge branch 2
