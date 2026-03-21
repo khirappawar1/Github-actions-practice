@@ -1,0 +1,16 @@
+name: Smart Path Trigger
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/*'
+    paths:
+      - 'src/**'
+      - 'app/**'
+
+jobs:
+  run-app-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Triggered because src/ or app/ changed"
