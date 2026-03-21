@@ -1,0 +1,22 @@
+name: scheduled workflows 
+
+on: 
+  schedule:
+    - cron: '30 2 * * 1' #(every Monday at 2:30 AM UTC)
+    - cron: '0 */6 * * *' #(every 6 hours)
+  workflow_dispatch:
+
+jobs:
+  
+  scheduled:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: schedule-print
+        run: echo "This schedule triggered :" ${{ github.event.schedule }}
+
+      - name: health check
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" www.google.com)
+          echo "Response code from wwww.google.com :" $code
