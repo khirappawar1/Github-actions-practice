@@ -1,0 +1,30 @@
+name: Artifact between jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Artifact_upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create the artifact file
+        run: |
+          echo "print the user $(whoami)" > user.txt
+
+      - name: upload the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-file
+          path: user.txt
+
+  Artifact_download:
+    runs-on: ubuntu-latest
+    needs: Artifact_upload
+    steps:
+      - name: download the artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: test-file
+
+      - name: print the content of the artifact
+        run: cat user.txt
