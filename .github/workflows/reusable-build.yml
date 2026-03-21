@@ -15,10 +15,17 @@ on:
     secrets:
         docker_token:
           required: true
+    outputs:
+        build_version:
+            description: "Generate the build version"
+            value: ${{ jobs.build.outputs.version }}
 
 jobs:
     build:
         runs-on: ubuntu-latest
+
+        outputs:
+            version: ${{ steps.set_version.outputs.version }}
 
         steps:
             - name: Checkout the code
@@ -32,3 +39,10 @@ jobs:
                 else
                 echo "Docker token is set: false"
                 fi
+            
+            - name: Build version
+              id: set_version
+              run: |
+                SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+                VERSION="v1.0-$SHORT_SHA"
+                echo "version=$VERSION" >> $GITHUB_OUTPUT
