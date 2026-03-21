@@ -1,23 +1,22 @@
----
-name: Call Resuable Build Workflow
+name: Call Reusable Build Workflow
+
 on:
   push:
     branches: [main]
-     
 
 jobs:
-    build:
-        uses: ./.github/workflows/reusable-build.yml
-        with: 
-            app_name: my-app
-            environment: production
-        secrets:
-          docker_token: ${{ secrets.DOCKER_TOKEN }}
-        
-    print-version:
-        needs:  build
-        runs-on: ubuntu-latest
-        steps:
-          - name: Print Build version
-            run: echo "Build version: ${{ needs.build.outputs.build_version }}"
+  build:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      app_name: "my-web-app"
+      environment: "production"
+    secrets:
+      docker_token: ${{ secrets.DOCKER_TOKEN }}
 
+  print-version:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Build version
+        run: echo "Build version: ${{ needs.build.outputs.build_version }}"

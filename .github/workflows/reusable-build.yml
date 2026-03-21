@@ -1,5 +1,5 @@
----
-name: Resuable Build Workflow
+name: Reusable Build Workflow
+
 on:
   workflow_call:
     inputs:
@@ -8,41 +8,43 @@ on:
         required: true
         type: string
       environment:
-        description: "Deployment name"
+        description: "Deployment environment"
         required: true
         type: string
-        default: staging 
+        default: staging
     secrets:
-        docker_token:
-          required: true
+      docker_token:
+        required: true
     outputs:
-        build_version:
-            description: "Generate the build version"
-            value: ${{ jobs.build.outputs.version }}
+      build_version:
+        description: "Generated build version"
+        value: ${{ jobs.build.outputs.version }}
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        outputs:
-            version: ${{ steps.set_version.outputs.version }}
+    outputs:
+      version: ${{ steps.set_version.outputs.version }}
 
-        steps:
-            - name: Checkout the code
-              uses: actions/checkout@v4
-            - name: Print build info
-              run: echo "Building ${{ inputs.app_name }} for environment ${{ inputs.environment }}"
-            - name: Print the docker token
-              run: |
-                if [ -n "${{ secrets.docker_token }}" ]; then
-                echo "Docker token is set: true"
-                else
-                echo "Docker token is set: false"
-                fi
-            
-            - name: Build version
-              id: set_version
-              run: |
-                SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
-                VERSION="v1.0-$SHORT_SHA"
-                echo "version=$VERSION" >> $GITHUB_OUTPUT
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print build info
+        run: echo "Building ${{ inputs.app_name }} for ${{ inputs.environment }}"
+
+      - name: Check Docker token
+        run: |
+          if [ -n "${{ secrets.docker_token }}" ]; then
+            echo "Docker token is set: true"
+          else
+            echo "Docker token is set: false"
+          fi
+
+      - name: Generate version
+        id: set_version
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          VERSION="v1.0-$SHORT_SHA"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
