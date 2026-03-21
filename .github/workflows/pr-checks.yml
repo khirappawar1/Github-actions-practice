@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: checkout the code
-              uses: actions/chckout@v4
+              uses: actions/checkout@v4
             - name: Fail if any PR more than 1 MB
               run: |
                 large_files:$(find . -type f -size +1MB)
