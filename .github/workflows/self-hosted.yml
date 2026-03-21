@@ -1,0 +1,16 @@
+---
+name: Self-hosted runner
+on: 
+    workflow_dispatch:
+
+jobs:
+    self-hosted:
+        runs-on: [self-hosted, my-linux-runner]
+        steps:
+            - name: Checking the runner system information
+              run: |
+                echo "check the hostname: $(hostname)"
+                echo "check Os: $(uname -a)"
+                echo "working directory: $PWD"
+                echo "Hello from the github actions"> hello.txt
+

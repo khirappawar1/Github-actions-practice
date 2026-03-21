@@ -1,0 +1,27 @@
+---
+name: Conditional Statements
+on:
+    push:
+    pull_request:
+
+jobs: 
+    conditional-job: 
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        steps:
+          - name: step that always runs
+            run: echo "Step always runs"
+
+          - name: Runs only when branch main
+            if: github.ref == 'refs/heads/main'
+            run: echo "Running on main branch"
+
+          - name: Step that always fails
+            id: fail_step
+            run: exit 1
+            continue-on-error: true
+
+          - name: step that fails when preious step fails
+            if: failure()
+            run: echo "previous step failed"
+            
