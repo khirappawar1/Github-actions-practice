@@ -10,15 +10,16 @@ jobs:
         steps:
             - name: checkout  code
               uses: actions/checkout@v4
+            
             - name: Fail if any PR more than 1 MB
               run: |
-                large_files:$(find . -type f -size +1MB)
+               large_files=$(find . -type f -size +1M)
                 if [ -n "$large_files" ]; then
-                echo "Files larger than 1MB found:"
-                echo "$large_files"
-                exit 1
+                  echo "Files larger than 1MB found:"
+                  echo "$large_files"
+                  exit 1
                 else
-                echo "All files under 1MB"
+                  echo "All files under 1MB"
                 fi
     branch-name-check:
         runs-on: ubuntu-latest
